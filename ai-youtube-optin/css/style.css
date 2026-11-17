@@ -1,0 +1,1528 @@
+/* AI×YouTube副業 無料2日間チャレンジ実践セミナー LP
+   参考 LP から借りたのは配色・構成・装飾の作りだけ（文言・ロゴ・写真は使っていない）。
+   色はすべて下の変数で管理する。 */
+:root {
+  --c-ink: #2b2b2b;
+  --c-dark: #333333;
+  --c-dark-2: #4a4a4a;
+  --c-bg: #ffffff;
+  --c-pale: #f3f3f5;
+  --c-outer: #e6e6ea;
+  --c-line: #d9d9e0;
+  --c-mute: #c9c9d2;
+  --c-red: #e5004f;
+  --c-coral: #ff5f5f;
+  --c-magenta: #c2267e;
+  --c-purple: #8b5cf6;
+  --c-teal: #33bfcb;
+  --c-green: #1e9c78;
+  --grad: linear-gradient(90deg, var(--c-coral) 0%, var(--c-magenta) 52%, var(--c-purple) 100%);
+  --grad-diag: linear-gradient(135deg, var(--c-coral) 0%, var(--c-purple) 100%);
+  --grad-deep: linear-gradient(160deg, #c4307f 0%, #9c2a8f 60%, #a83d98 100%);
+  --grad-cta: linear-gradient(120deg, var(--c-teal) 0%, var(--c-green) 100%);
+  --stripe: repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.022) 0 2px, transparent 2px 16px);
+  --slant: 28px;
+  --gutter: 20px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--c-outer);
+  color: var(--c-ink);
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 17px;
+  line-height: 1.9;
+}
+
+a { color: inherit; }
+
+/* 列: スマホ幅が基準。PC でも広げず中央に置く */
+.lp, .lp-legal {
+  max-width: 480px;
+  margin: 0 auto;
+}
+.lp {
+  overflow: hidden;
+  background: var(--c-bg);
+}
+@media (min-width: 520px) {
+  .lp, .lp-legal { box-shadow: 0 0 28px rgba(0, 0, 0, 0.18); }
+}
+
+/* ---- 区画 ---- */
+.sec {
+  position: relative;
+  padding: 64px var(--gutter);
+}
+.sec--pale { background: var(--stripe), var(--c-pale); }
+.sec--white { background: var(--c-bg); }
+.sec--grad { background: var(--grad-deep); }
+/* 濃い色の区画: 上下を斜めに切り、前後の区画に少し重ねる */
+.sec--dark {
+  z-index: 1;
+  margin: calc(var(--slant) * -1) 0;
+  padding: calc(64px + var(--slant)) var(--gutter);
+  background: var(--c-dark);
+  color: var(--c-bg);
+  clip-path: polygon(0 var(--slant), 100% 0, 100% calc(100% - var(--slant)), 0 100%);
+}
+
+/* ---- 区画の見出し: 上に薄い英字の飾り、下に日本語の見出し ---- */
+.hd { margin: 0 0 30px; text-align: center; }
+.hd[data-en]::before {
+  content: attr(data-en);
+  display: block;
+  margin-bottom: 4px;
+  color: var(--c-mute);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 25px;
+  font-weight: 300;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  line-height: 1.4;
+}
+.sec--dark .hd[data-en]::before,
+.sec--grad .hd[data-en]::before { color: rgba(255, 255, 255, 0.34); }
+.hd h2 {
+  margin: 0;
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1.5;
+  word-break: auto-phrase;
+  text-wrap: balance;
+}
+.sec--grad .hd h2 { color: var(--c-bg); }
+
+/* グラデーションの文字 */
+.gt {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 縦の細い線（区画の中のつなぎ） */
+.vline {
+  width: 2px;
+  height: 60px;
+  margin: 28px auto;
+  background: linear-gradient(var(--c-coral), var(--c-purple));
+}
+
+/* ---- 本文 ---- */
+.tx > * { margin: 0; }
+.tx > * + * { margin-top: 1em; }
+.tx--c { text-align: center; }
+.tx--c p { word-break: auto-phrase; text-wrap: pretty; }
+.em { color: var(--c-red); font-weight: 700; }
+.b { font-weight: 700; }
+.hl {
+  padding: 0.04em 0.32em;
+  background: var(--c-red);
+  color: var(--c-bg);
+  font-weight: 700;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.big { font-size: 21px; font-weight: 700; line-height: 1.7; word-break: auto-phrase; text-wrap: balance; }
+.card__body .b { word-break: auto-phrase; }
+.note { font-size: 14px; line-height: 1.7; }
+
+/* 区画の結びの大きな 1 行 */
+.closing {
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.5;
+  text-align: center;
+  word-break: auto-phrase;
+  text-wrap: balance;
+}
+.tx > .closing { margin-top: 36px; }
+
+/* 濃い箱に白い文字で 1 行ずつ見せる結び */
+.boxline {
+  margin: 40px 0 0;
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 2;
+  text-align: center;
+}
+.boxline span {
+  padding: 0.14em 0.42em;
+  background: var(--c-dark);
+  color: var(--c-bg);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* 吹き出し（読者の声） */
+.bubble {
+  position: relative;
+  margin: 0 auto 30px;
+  padding: 16px 18px;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-weight: 700;
+  line-height: 1.7;
+  text-align: center;
+}
+.bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -11px;
+  left: 50%;
+  margin-left: -10px;
+  border-top: 12px solid var(--c-bg);
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+}
+.bubble p { margin: 0; word-break: auto-phrase; text-wrap: balance; }
+.bubble p + p { margin-top: 0.4em; }
+.bubble--line { box-shadow: 0 3px 14px rgba(0, 0, 0, 0.1); }
+
+/* 読者の声を濃い帯で交互に見せる */
+.voices { margin: 34px calc(var(--gutter) * -1) 0; }
+.voices p {
+  margin: 0;
+  padding: 26px 20px;
+  background: linear-gradient(90deg, #2a2a2a, var(--c-dark-2));
+  color: var(--c-bg);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.7;
+  word-break: auto-phrase;
+  text-wrap: balance;
+}
+.voices p + p { border-top: 1px solid #5a5a5a; }
+.voices p:nth-child(even) {
+  background: linear-gradient(270deg, #2a2a2a, var(--c-dark-2));
+  text-align: right;
+}
+
+/* ---- 引用（実在の人の発言） ---- */
+.quote { margin-top: 8px; text-align: center; }
+.quote__lead { margin: 0; font-size: 18px; line-height: 1.8; }
+.quote__band {
+  margin: 18px -12px 8px;
+  padding: 16px 16px;
+  background: var(--grad);
+  color: var(--c-bg);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.6;
+}
+.src {
+  margin: 0;
+  color: #555555;
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.6;
+  text-align: right;
+}
+
+/* ---- 白いカード（上にグラデーションの帯と、濃い色の札） ---- */
+.card {
+  position: relative;
+  margin-top: 46px;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+.card__tab {
+  position: absolute;
+  top: -19px;
+  left: 50%;
+  margin: 0;
+  padding: 3px 36px;
+  background: var(--c-dark);
+  color: var(--c-bg);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0 50%);
+}
+.card__head {
+  margin: 0;
+  padding: 34px 16px 22px;
+  background: var(--grad);
+  color: var(--c-bg);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.5;
+  text-align: center;
+  word-break: auto-phrase;
+  text-wrap: balance;
+}
+.card__head--plain { padding-top: 20px; padding-bottom: 20px; }
+.card__body { padding: 22px 20px 26px; }
+.card__catch {
+  color: var(--c-magenta);
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* 番号つきのリスト（グラデーションの丸数字と、下の線）・チェックのリスト・経歴のリスト */
+.nlist, .clist, .dlist { margin: 0; padding: 0; list-style: none; }
+.nlist { counter-reset: n; }
+.nlist li, .clist li {
+  position: relative;
+  padding: 17px 0 17px 56px;
+  border-bottom: 1px solid var(--c-line);
+  font-weight: 700;
+  line-height: 1.6;
+}
+.nlist li:last-child, .clist li:last-child { border-bottom: 0; }
+.nlist li::before, .clist li::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--grad-diag);
+}
+.nlist li { counter-increment: n; }
+.nlist li::before {
+  content: counter(n);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-bg);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+}
+/* チェックのリスト: 丸の中に白いチェックの形 */
+.clist li::after {
+  content: "";
+  position: absolute;
+  top: 27px;
+  left: 13px;
+  width: 14px;
+  height: 8px;
+  border-bottom: 3px solid var(--c-bg);
+  border-left: 3px solid var(--c-bg);
+  transform: rotate(-45deg);
+}
+.nlist__title { display: block; color: var(--c-magenta); font-size: 18px; }
+.nlist__desc { display: block; margin-top: 4px; font-size: 16px; font-weight: 400; line-height: 1.8; }
+
+/* 小さな四角の印のリスト（経歴） */
+.dlist li {
+  position: relative;
+  padding: 11px 0 11px 22px;
+  border-bottom: 1px solid var(--c-line);
+  font-size: 16px;
+  line-height: 1.7;
+}
+.dlist li:last-child { border-bottom: 0; }
+.dlist li::before {
+  content: "";
+  position: absolute;
+  top: 1.25em;
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  background: var(--grad-diag);
+}
+
+/* 白い板（特典）と、その見出しの帯 */
+.panel {
+  padding: 26px 20px 12px;
+  border-radius: 6px;
+  background: var(--c-bg);
+  color: var(--c-ink);
+}
+.panel__band {
+  margin: 0 0 6px;
+  padding: 8px 10px;
+  background: var(--grad);
+  color: var(--c-bg);
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* 小見出し（左右に細い線） */
+.sub {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 44px 0 16px;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+.sub::before, .sub::after { content: ""; flex: 1; height: 2px; background: var(--grad); }
+.sub span { flex: none; max-width: 80%; text-align: center; }
+
+/* 実績の板（数字を大きく） */
+.stats { margin: 0; padding: 0; list-style: none; color: var(--c-ink); }
+.stats li {
+  padding: 18px 16px;
+  border-top: 5px solid var(--c-magenta);
+  background: var(--c-bg);
+  font-weight: 700;
+  line-height: 1.7;
+  text-align: center;
+  word-break: auto-phrase;
+  text-wrap: balance;
+}
+.stats li + li { margin-top: 14px; }
+.stats .em { font-size: 22px; white-space: nowrap; }
+
+/* 必要なものの板 */
+.need {
+  margin: 0;
+  padding: 22px 18px;
+  border: 2px solid var(--c-dark);
+  background: var(--c-bg);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.8;
+  text-align: center;
+  word-break: auto-phrase;
+  text-wrap: balance;
+}
+
+/* 素材待ちの枠 */
+.lp-asset-wait {
+  margin: 0 auto 26px;
+  padding: 54px 16px;
+  border: 2px dashed var(--c-mute);
+  background: var(--c-bg);
+  color: #555555;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* ---- ファーストビュー ---- */
+.fv {
+  position: relative;
+  padding: 0 0 calc(40px + var(--slant));
+  background: var(--stripe), linear-gradient(180deg, var(--c-bg) 0%, var(--c-pale) 100%);
+  text-align: center;
+}
+/* 言葉をまとめた箱: 上にグラデーションの帯、中に見出しとキャッチ */
+.fv__box {
+  margin: 18px 16px 0;
+  background: var(--c-bg);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.14);
+}
+.fv__band {
+  margin: 0;
+  padding: 8px 10px;
+  background: var(--grad);
+  color: var(--c-bg);
+  font-size: 19px;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+}
+.fv__inner { padding: 26px 10px 30px; border: 2px solid var(--c-dark); border-top: 0; }
+.fv__head {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.4;
+  word-break: auto-phrase;
+  text-wrap: balance;
+}
+.fv__lead {
+  width: fit-content;
+  margin: 18px auto 0;
+  padding: 0 6px 8px;
+  border-bottom: 2px solid var(--c-magenta);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+.fv__catch { margin: 18px 0 0; font-weight: 900; line-height: 1.25; }
+.fv__row { display: block; font-size: 26px; letter-spacing: 0.06em; }
+.fv__block {
+  display: block;
+  width: fit-content;
+  margin: 10px auto 8px;
+  padding: 0 24px 8px;
+  background: var(--grad);
+  color: var(--c-bg);
+  font-size: 64px;
+  letter-spacing: 0.04em;
+  transform: skew(-8deg);
+}
+.fv__num { margin-left: 0.12em; font-size: 64px; letter-spacing: 0.02em; vertical-align: -0.08em; }
+
+
+/* カレンダー風の 2 日間: 上に濃い色の見出し、下に 2 枚の日めくり */
+.fv__cal { margin: 26px 16px 0; }
+.fv__cal-title {
+  margin: 0;
+  padding: 10px 8px;
+  background: var(--c-dark);
+  color: var(--c-bg);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+.fv__days {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 14px 12px 16px;
+  border: 2px solid var(--c-dark);
+  border-top: 0;
+  background: var(--c-bg);
+}
+.cal {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--c-line);
+  border-radius: 10px;
+  background: var(--c-bg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+.cal p { margin: 0; }
+.cal__top {
+  position: relative;
+  padding: 14px 0 5px;
+  background: var(--grad);
+  color: var(--c-bg);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+}
+/* 日めくりのとじ穴 */
+.cal__top::before, .cal__top::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-bg);
+}
+.cal__top::before { left: 26%; }
+.cal__top::after { right: 26%; }
+.cal__num { padding-top: 6px; font-size: 20px; font-weight: 900; line-height: 1.2; }
+.cal__n {
+  margin-right: 2px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 58px;
+  line-height: 1;
+  vertical-align: -0.06em;
+}
+.cal__body {
+  padding: 6px 6px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  word-break: auto-phrase;
+  text-wrap: balance;
+}
+
+/* 講師写真: 右下にグラデーションの面をずらして重ねる */
+.prof {
+  position: relative;
+  width: 76%;
+  max-width: 300px;
+  margin: 0 auto 44px;
+}
+.prof::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: -14px;
+  bottom: -14px;
+  left: 18px;
+  background: var(--grad-diag);
+}
+.prof img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+}
+
+/* ---- 申込ボタン: 丸い大きなボタン。右に白い丸と再生の三角 ---- */
+.cta { padding: 4px 0; text-align: center; }
+.cta__btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 84px;
+  padding: 12px 66px 12px 30px;
+  border-radius: 999px;
+  background: var(--grad-cta);
+  box-shadow: inset 0 -7px 12px rgba(0, 0, 0, 0.13), inset 0 5px 10px rgba(255, 255, 255, 0.22), 0 8px 18px rgba(30, 156, 120, 0.34);
+  color: var(--c-bg);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+  word-break: auto-phrase;
+  text-wrap: balance;
+}
+.cta__btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  border-radius: 50%;
+  background: var(--c-bg);
+}
+.cta__btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  z-index: 1;
+  margin-top: -8px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 13px solid var(--c-green);
+}
+.cta__btn:active { transform: translateY(3px); }
+.cta__btn:focus-visible { outline: 3px solid var(--c-purple); outline-offset: 3px; }
+.cta__note { margin: 12px 0 0; font-size: 14px; line-height: 1.7; }
+.fv .cta { margin: 28px var(--gutter) 0; }
+.cta--gap { margin-top: 36px; }
+
+/* ---- よくある質問 ---- */
+.faq details {
+  background: var(--c-bg);
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.09);
+}
+.faq details + details { margin-top: 16px; }
+.faq summary, .faq details p {
+  position: relative;
+  margin: 0;
+  padding: 18px 16px 18px 62px;
+  line-height: 1.7;
+}
+.faq summary {
+  font-weight: 700;
+  list-style: none;
+  cursor: default;
+  pointer-events: none;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq details p { border-top: 1px solid var(--c-line); font-size: 16px; }
+.faq summary::before, .faq details p::before {
+  position: absolute;
+  top: 15px;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1;
+}
+.faq summary::before { content: "Q"; background: var(--grad-diag); color: var(--c-bg); }
+.faq details p::before { content: "A"; border: 2px solid var(--c-red); background: var(--c-bg); color: var(--c-red); }
+
+/* ---- フッター ---- */
+.lp-legal {
+  padding: 32px var(--gutter) 120px;
+  background: var(--c-dark);
+  color: var(--c-bg);
+  font-size: 13px;
+  line-height: 1.7;
+  text-align: center;
+}
+.lp-legal a { text-decoration: underline; text-underline-offset: 3px; }
+.lp-legal__links { margin: 0 0 14px; }
+.lp-legal__links a { display: inline-block; margin: 0 8px; }
+.lp-legal__note { margin: 0; color: rgba(255, 255, 255, 0.7); }
+
+/* ---- 画面の下に追従する申込ボタン ---- */
+.lp-sticky {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 10px 16px 14px;
+  background: rgba(255, 255, 255, 0.88);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+}
+.lp-sticky.is-visible { opacity: 1; visibility: visible; transform: none; }
+.lp-sticky .cta__btn { min-height: 64px; font-size: 19px; }
+@media (prefers-reduced-motion: reduce) {
+  .lp-sticky { transition: none; }
+}
+
+/* ---- ファーストビューの写真: 言葉の箱の背景に敷く。暗い膜を重ね、文字は白と明るいグラデーション ---- */
+.fv__hero {
+  --grad-light: linear-gradient(90deg, #ff8f8f 0%, #ff7fc4 50%, #b9a2ff 100%);
+  padding: 20px 16px calc(34px + var(--slant));
+  background:
+    linear-gradient(180deg, rgba(14, 16, 28, 0.38) 0%, rgba(14, 16, 28, 0.18) 55%, rgba(14, 16, 28, 0.42) 100%),
+    url("../img/fv.webp") center / cover no-repeat var(--c-dark);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--slant)), 0 100%);
+}
+.fv__hero .fv__box { margin: 0; background: transparent; box-shadow: 0 8px 26px rgba(0, 0, 0, 0.4); }
+.fv__hero .fv__inner {
+  border-color: rgba(255, 255, 255, 0.72);
+  background: rgba(14, 16, 28, 0.4);
+  color: var(--c-bg);
+}
+.fv__hero .gt { background-image: var(--grad-light); }
+.fv__hero .fv__lead { border-bottom-color: #ff7fc4; }
+/* 影は白い文字だけに付ける（グラデーションの文字に付けると色がくすむ） */
+.fv__hero .fv__lead, .fv__hero .fv__row:first-child { text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6); }
+.fv__hero .fv__head .gt, .fv__hero .fv__num { filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45)); }
+.fv .fv__hero + .cta { margin-top: 6px; }
+
+/* 赤いブロックを文字ごと大きく見せる */
+.hl--xl {
+  display: inline-block;
+  margin: 0 0.08em;
+  padding: 0.02em 0.22em 0.06em;
+  font-size: 1.7em;
+  font-weight: 900;
+  line-height: 1.25;
+  vertical-align: -0.12em;
+}
+.closing .hl--xl { font-size: 1.36em; }
+
+/* ---- 改行を整える: 文節で折り返し、行末に 1〜2 文字だけ残さない。中央寄せの文は行の長さをそろえる ---- */
+p, li, summary, h1, h2, blockquote {
+  word-break: auto-phrase;
+  line-break: strict;
+  text-wrap: pretty;
+}
+.tx--c p, .hd h2, .closing, .big, .card__head, .card__catch, .bubble p, .voices p,
+.need, .quote__lead, .quote__band, .boxline, .stats li, .cal__body, .cta__btn, .cta__note { text-wrap: balance; }
+
+/* 見出しを 2 段に分ける（2 段目は 1 行に収める） */
+.hd--2line h2 .gt {
+  display: block;
+  font-size: clamp(18px, 5.7vw, 23px);
+  white-space: nowrap;
+}
+
+/* 吹き出し: 内側だけ薄い灰色、ふちは白 */
+.bubble--soft { border: 6px solid var(--c-bg); background: #e6e6ec; }
+.bubble--soft::after { bottom: -17px; }
+
+/* ---- ファーストビューの写真: 言葉の箱の右下に置き、文字に重ならないようにする ---- */
+.fv__hero {
+  position: relative;
+  padding-bottom: calc(150px + var(--slant));
+  background: linear-gradient(180deg, #0c0e19 0%, #121625 100%);
+}
+.fv__hero::before {
+  content: "";
+  position: absolute;
+  top: calc(100% - 292px);
+  right: -9%;
+  width: 124%;
+  aspect-ratio: 1080 / 1260;
+  background: url("../img/fv.webp") center / cover no-repeat;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 26%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 26%);
+}
+.fv__hero .fv__box { position: relative; z-index: 1; }
+.fv__hero .fv__inner { background: rgba(12, 14, 25, 0.82); }
+
+/* 途中で改行させないまとまり（人名・強調の一文など） */
+.nw { white-space: nowrap; }
+
+/* ---- Day1・Day2 のカード: 丸い札 + 大きい題、濃い帯のキャッチ、番号つきの流れ、声の吹き出し、濃い帯の結び ---- */
+.day {
+  position: relative;
+  overflow: hidden;
+  margin-top: 40px;
+  border-radius: 16px;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+.day p { margin: 0; }
+.day__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  overflow: hidden;
+  padding: 20px 16px;
+  background: var(--grad);
+  color: var(--c-bg);
+}
+/* 見出しの飾り: 右上の大きな輪と、左下の小さな輪 */
+.day__head::before, .day__head::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.day__head::before { top: -56px; right: -44px; width: 160px; height: 160px; border: 24px solid rgba(255, 255, 255, 0.16); }
+.day__head::after { bottom: -34px; left: 62px; width: 76px; height: 76px; border: 12px solid rgba(255, 255, 255, 0.12); }
+.day__tag {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: var(--c-bg);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.22);
+  color: var(--c-dark);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1;
+}
+.day__tag span {
+  margin-top: 2px;
+  background: var(--grad-diag);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 48px;
+  letter-spacing: 0;
+  line-height: 1;
+}
+.day__title {
+  position: relative;
+  z-index: 1;
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1.4;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  text-wrap: balance;
+}
+.day__catch {
+  position: relative;
+  padding: 20px 14px 22px;
+  background: var(--c-dark);
+  color: var(--c-bg);
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1.5;
+  text-align: center;
+  text-wrap: balance;
+}
+/* キャッチの下に、カードの本文へ向かう三角 */
+.day__catch::after {
+  content: "";
+  position: absolute;
+  bottom: -13px;
+  left: 50%;
+  z-index: 1;
+  margin-left: -14px;
+  border-top: 14px solid var(--c-dark);
+  border-right: 14px solid transparent;
+  border-left: 14px solid transparent;
+}
+.day__steps {
+  margin: 0;
+  padding: 30px 16px 4px;
+  list-style: none;
+  counter-reset: step;
+}
+.day__steps li {
+  position: relative;
+  padding: 0 0 22px 52px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.75;
+  counter-increment: step;
+}
+.day__steps li::before {
+  content: counter(step);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--grad-diag);
+  color: var(--c-bg);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+}
+/* 番号どうしをつなぐ縦の線 */
+.day__steps li::after {
+  content: "";
+  position: absolute;
+  top: 42px;
+  bottom: 4px;
+  left: 18px;
+  width: 2px;
+  background: linear-gradient(var(--c-coral), var(--c-purple));
+  opacity: 0.45;
+}
+.day__steps li:last-child::after { display: none; }
+.day__voice {
+  position: relative;
+  margin: 0 16px;
+  padding: 16px 12px;
+  border-radius: 14px;
+  background: #f3eefd;
+  color: var(--c-magenta);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.6;
+  text-align: center;
+}
+.day__voice p { text-wrap: balance; }
+.day__voice::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  margin-left: -12px;
+  border-top: 13px solid #f3eefd;
+  border-right: 12px solid transparent;
+  border-left: 12px solid transparent;
+}
+.day__result {
+  padding: 0 16px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.7;
+  text-align: center;
+  text-wrap: balance;
+}
+.day__voice + .day__result { margin-top: 26px; }
+.day__result + .day__result { margin-top: 8px; }
+.day__end {
+  margin-top: 22px;
+  padding: 14px 10px 16px;
+  background: var(--c-dark);
+  color: var(--c-bg);
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1.4;
+  text-align: center;
+}
+.day__end span {
+  margin: 0 0.12em;
+  background: linear-gradient(90deg, #ff8f8f 0%, #ff7fc4 50%, #b9a2ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 34px;
+  vertical-align: -0.08em;
+}
+
+/* ==== 区画ごとの装飾の追加 ==== */
+/* 余白を少し詰める */
+.sec { padding-top: 54px; padding-bottom: 54px; }
+.sec--dark { padding-top: calc(54px + var(--slant)); padding-bottom: calc(54px + var(--slant)); }
+
+/* 見出しの下に短いグラデーションの線 */
+.hd h2::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 4px;
+  margin: 14px auto 0;
+  border-radius: 2px;
+  background: var(--grad);
+}
+
+/* 濃い箱に白い文字で見せる短い一言 */
+.dk {
+  display: inline-block;
+  padding: 0.14em 0.6em;
+  background: var(--c-dark);
+  color: var(--c-bg);
+}
+.big { font-size: 23px; }
+
+/* 問いかけ: グラデーションのふちの丸い札と、下向きの三角 */
+.ask {
+  position: relative;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 10px 28px;
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: linear-gradient(var(--c-bg), var(--c-bg)) padding-box, var(--grad) border-box;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.5;
+  text-align: center;
+}
+.ask::after {
+  content: "";
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  margin-left: -9px;
+  border-top: 12px solid var(--c-magenta);
+  border-right: 9px solid transparent;
+  border-left: 9px solid transparent;
+}
+.tx > .ask + * { margin-top: 1.5em; }
+
+/* グラデーションの帯の小見出し */
+.band {
+  padding: 9px 12px 11px;
+  background: var(--grad);
+  color: var(--c-bg);
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1.5;
+  text-align: center;
+  transform: skew(-6deg);
+}
+.tx > .band { margin-top: 1.7em; }
+
+/* 数字で見せる事実の箱 */
+.fact {
+  padding: 18px 14px 20px;
+  border-top: 5px solid var(--c-magenta);
+  background: var(--c-pale);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+  text-align: center;
+  text-wrap: balance;
+}
+.fact .em { display: block; margin-top: 6px; font-size: 22px; line-height: 1.5; }
+
+/* チェックのリストをカードにする */
+.clist--card {
+  padding: 4px 18px;
+  border-radius: 12px;
+  background: var(--c-bg);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+.clist--card li { font-size: 17px; font-weight: 500; line-height: 1.75; }
+
+/* 必要なもの: チェックつきの 3 枚の札 */
+.needs { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.needs li {
+  position: relative;
+  padding: 15px 14px 15px 60px;
+  border: 2px solid var(--c-dark);
+  background: var(--c-bg);
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+.needs li::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  width: 34px;
+  height: 34px;
+  margin-top: -17px;
+  border-radius: 50%;
+  background: var(--grad-diag);
+}
+.needs li::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 25px;
+  width: 12px;
+  height: 7px;
+  margin-top: -6px;
+  border-bottom: 3px solid var(--c-bg);
+  border-left: 3px solid var(--c-bg);
+  transform: rotate(-45deg);
+}
+
+/* 心がけていること: 上に色の線が付いた白い板 */
+.motto {
+  padding: 18px 14px 20px;
+  border-top: 5px solid var(--c-magenta);
+  border-radius: 0 0 12px 12px;
+  background: var(--c-bg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+  text-align: center;
+  text-wrap: balance;
+}
+.motto .em { font-size: 21px; line-height: 1.5; }
+.closing--s { font-size: 23px; }
+
+/* 左上と右下にカギ型の飾り */
+.bracket {
+  position: relative;
+  padding: 22px 16px;
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1.6;
+  text-align: center;
+  text-wrap: balance;
+}
+.bracket::before, .bracket::after { content: ""; position: absolute; width: 30px; height: 30px; }
+.bracket::before { top: 0; left: 0; border-top: 4px solid var(--c-coral); border-left: 4px solid var(--c-coral); }
+.bracket::after { right: 0; bottom: 0; border-right: 4px solid var(--c-purple); border-bottom: 4px solid var(--c-purple); }
+.stats .em { font-size: 26px; }
+
+/* ==== 最後のメッセージの区画: 中央寄せ・大きな文字・詰めた余白 ==== */
+.msg .tx { text-align: center; }
+.msg .tx p { font-size: 19px; line-height: 1.8; text-wrap: balance; }
+.msg .tx > * + * { margin-top: 0.7em; }
+.msg .tx .big { margin-top: 1.1em; font-size: 26px; line-height: 1.5; }
+.msg .tx .b { font-size: 22px; line-height: 1.6; }
+.msg .em { font-size: 1.12em; }
+.msg .nw { white-space: normal; }
+.msg .vline { height: 40px; margin: 22px auto; }
+.msg .tx .closing { margin-top: 26px; font-size: 31px; line-height: 1.45; }
+
+/* 読者の声の 2 行: 鮮やかなグラデーションの帯 */
+.voices--vivid { margin-top: 0; margin-bottom: 30px; }
+.voices--vivid p,
+.voices--vivid p:nth-child(even) {
+  padding: 20px 16px;
+  border-top: 0;
+  background: linear-gradient(90deg, #ff4d4d 0%, #e5004f 38%, #a516c9 72%, #6d3bff 100%);
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+}
+.voices--vivid p:nth-child(even) {
+  margin-top: 6px;
+  background: linear-gradient(270deg, #ff4d4d 0%, #e5004f 38%, #a516c9 72%, #6d3bff 100%);
+}
+
+/* ==== メッセージの区画の調整 ==== */
+/* 見出しの 2 段目（1 行に収める） */
+.msg .hd--2line h2 .gt { font-size: clamp(19px, 6.1vw, 24px); }
+
+/* 読者の声の 2 行: 薄暗いグラデーションの帯 */
+.voices--vivid p,
+.voices--vivid p:nth-child(even) {
+  background: linear-gradient(90deg, #6e2230 0%, #5a1d4f 48%, #33276b 100%);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.voices--vivid p:nth-child(even) { background: linear-gradient(270deg, #6e2230 0%, #5a1d4f 48%, #33276b 100%); }
+
+/* 「そんなあなたに、伝えたい。」を大きく */
+.msg .tx .msg__lead { font-size: 34px; font-weight: 900; line-height: 1.4; }
+
+/* 読者の声の 2 行: 灰色のグラデーションの帯 */
+.voices--vivid p,
+.voices--vivid p:nth-child(even) { background: linear-gradient(90deg, #3c3c41 0%, #5f5f66 55%, #8a8a93 100%); }
+.voices--vivid p:nth-child(even) { background: linear-gradient(270deg, #3c3c41 0%, #5f5f66 55%, #8a8a93 100%); }
+
+/* 最後の区画（結びの文と申込ボタン）: 淡いピンクから淡い紫への背景 */
+.final { background: linear-gradient(160deg, #ffe9f0 0%, #f6e8fb 50%, #e9e6ff 100%); }
+
+/* 「そのための2日間です。」を大きく（2 行） */
+.tx > .closing--xl { margin-top: 32px; font-size: 44px; line-height: 1.3; }
+
+/* 区画の途中に置く帯: 前後の文との間をあける */
+.voices--mid { margin-top: 34px; margin-bottom: 0; }
+
+/* ==== グラデーションの統一: オレンジ → ピンクの 1 種類にそろえる ====
+   色つきのグラデーションはすべて --c-coral（始まり）と --c-purple（終わり）から作っているので、
+   この 2 色と、それを使う変数を定義し直す。申込ボタン（青緑）と灰色の帯は対象外。 */
+:root {
+  --c-coral: #ff7a18;    /* グラデーションの始まり: オレンジ */
+  --c-purple: #ff2d87;   /* グラデーションの終わり: ピンク */
+  --c-magenta: #f2416b;  /* 単色で使う所（小見出しの文字・上の線）: 2 色の中間 */
+  --grad: linear-gradient(90deg, var(--c-coral) 0%, var(--c-purple) 100%);
+  --grad-diag: linear-gradient(135deg, var(--c-coral) 0%, var(--c-purple) 100%);
+  --grad-deep: linear-gradient(160deg, var(--c-coral) 0%, var(--c-purple) 100%);
+}
+/* 暗い地の上の文字にも、同じグラデーションを使う */
+.fv__hero { --grad-light: var(--grad); }
+.fv__hero .fv__lead { border-bottom-color: var(--c-purple); }
+.day__end span { background-image: var(--grad); }
+
+/* グラデーションの帯の上の白い文字: 明るい色の上でも読めるよう、薄い影を付ける */
+.fv__band, .card__head, .panel__band, .band, .quote__band, .cal__top, .fv__block { text-shadow: 0 1px 4px rgba(0, 0, 0, 0.28); }
+
+/* 淡い色の面も、同じ色味にそろえる */
+.final { background: linear-gradient(160deg, #fff0e0 0%, #ffe4ee 100%); }
+.day__voice { background: #fff0f3; }
+.day__voice::after { border-top-color: #fff0f3; }
+
+/* 「AIを活用して〜」の 2 つの帯: 統一したグラデーションの明るい帯 */
+.voices--bright p,
+.voices--bright p:nth-child(even) { background: var(--grad); text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); }
+.voices--bright p:nth-child(even) { background: linear-gradient(270deg, var(--c-coral) 0%, var(--c-purple) 100%); }
+
+/* ---- ファーストビュー（画像なし）: 文字だけを大きく組む。色は下の区画と同じグラデーション（--grad）。
+        上から 帯 → 問いかけ → 一文 → 「プロ体験」の大きな板 → 「2日間」 → ボタン ---- */
+.hero { padding: 0 0 6px; text-align: center; }
+.hero__logo, .hero__q, .hero__lead, .hero__catch { margin: 0; white-space: nowrap; }
+.hero__logo {
+  padding: 12px 10px;
+  background: var(--grad);
+  color: var(--c-bg);
+  font-size: clamp(20px, 6.4vw, 30px);
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
+}
+.hero__q {
+  margin-top: 34px;
+  font-size: clamp(29px, 9.6vw, 46px);
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  line-height: 1.32;
+}
+.hero__q .gt { display: inline-block; }
+.hero__lead {
+  width: fit-content;
+  margin: 24px auto 0;
+  padding: 0 4px 8px;
+  border-bottom: 3px solid transparent;
+  border-image: var(--grad) 1;
+  color: var(--c-dark);
+  font-size: clamp(17px, 5.5vw, 26px);
+  font-weight: 900;
+  line-height: 1.5;
+}
+.hero__catch { margin-top: 26px; color: var(--c-dark); font-weight: 900; line-height: 1.15; }
+.hero__row { display: block; font-size: clamp(24px, 8vw, 38px); letter-spacing: 0.06em; }
+.hero__block {
+  display: block;
+  width: fit-content;
+  margin: 12px auto 6px;
+  padding: 0.02em 0.34em 0.12em;
+  background: var(--grad);
+  color: var(--c-bg);
+  font-size: clamp(54px, 18.4vw, 88px);
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.22);
+  transform: skew(-8deg);
+  box-shadow: 0 10px 22px rgba(255, 45, 135, 0.28);
+}
+.hero__num {
+  margin-left: 0.1em;
+  font-size: clamp(64px, 21.5vw, 103px);
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  vertical-align: -0.1em;
+}
+.hero .cta { margin: 30px var(--gutter) 0; }
+.fv .fv__cal { margin-top: 30px; }
+
+/* ファーストビューの問いかけを吹き出しにする: 白い面にふちを付け、下にしっぽ。後ろに影を落とす */
+.hero__q {
+  position: relative;
+  width: fit-content;
+  margin: 32px auto 0;
+  padding: 16px 18px 18px;
+  border: 3px solid var(--c-magenta);
+  border-radius: 22px;
+  background: var(--c-bg);
+  font-size: clamp(25px, 8.2vw, 39px);
+  filter: drop-shadow(0 12px 12px rgba(0, 0, 0, 0.26));
+}
+.hero__q::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -13px;
+  width: 22px;
+  height: 22px;
+  border-right: 3px solid var(--c-magenta);
+  border-bottom: 3px solid var(--c-magenta);
+  background: var(--c-bg);
+  transform: translateX(-50%) rotate(45deg);
+}
+.hero__lead { margin-top: 40px; }
+
+/* 「プロ体験とは」の区画の帯（2日間・プロ体験）: グラデーションの終わりのピンク一色にする */
+[data-frame="pro"] .hl--xl { background: var(--c-purple); }
+
+/* 「セミナー参加に必要なもの」の区画: 一番下の区画と同じ薄い色を敷く */
+[data-frame="need"] { background: linear-gradient(160deg, #fff0e0 0%, #ffe4ee 100%); }
+
+/* 「私たちは、誰よりも楽しみながら仕事をしています。」: 濃い区画の中で白いブロックにする（カギ型の飾りは残す） */
+[data-frame="company"] .bracket {
+  margin: 26px 0;
+  padding: 26px 18px;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+[data-frame="company"] .bracket::before { top: 8px; left: 8px; }
+[data-frame="company"] .bracket::after { right: 8px; bottom: 8px; }
+
+/* 「最後に、大切なメッセージがあります。」の見出しを大きく: 1 段目は特大、2 段目は 1 行に収まる上限まで（左右の余白へ少し広げる） */
+.msg .hd--2line h2 { margin: 0 -14px; font-size: clamp(34px, 11vw, 52px); font-weight: 900; line-height: 1.35; }
+.msg .hd--2line h2 .gt { font-size: clamp(20px, 6.8vw, 32px); letter-spacing: 0; line-height: 1.6; }
+
+/* 「私たちは、誰よりも楽しみながら仕事をしています。」: ゴシック体のまま、大きくしすぎない */
+[data-frame="company"] .bracket {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+/* 最後の区画の「一緒に2日間、やりきりましょう。」: 黒い帯をグラデーションの帯にする */
+.final .boxline span { background: var(--grad); text-shadow: 0 1px 4px rgba(0, 0, 0, 0.28); }
+
+/* ==== 中央寄せの文字を、見た目でも中央にそろえる ====
+   全角のかっこ・句読点は、文字の片側半分が空白。行頭の「 や行末の 。、」 があると、その空白の分だけ
+   文字が左右どちらかに寄って見える。空白の分（半文字）を詰めて、見える文字の中心を行の中心に合わせる。 */
+.ps { margin-left: -0.5em; }
+.pe { margin-right: -0.5em; }
+
+/* 字間をあけた中央寄せの文字は、最後の文字の右にだけ余白が付いて左に寄る。同じ幅を左にも足す */
+.hero__logo { padding-left: calc(10px + 0.12em); }
+.hero__row:first-child { padding-left: 0.06em; }
+.hero__block { text-indent: 0.03em; }
+.fv__cal-title { text-indent: 0.04em; }
+
+/* 申込ボタン: 文字をボタン全体の中央に置く（右の丸い矢印と同じ幅を左にもあける） */
+.cta__btn { padding: 12px 60px; font-size: 20px; letter-spacing: 0.05em; text-indent: 0.05em; }
+
+/* 「そのための2日間です。」: 大きく 1 行にして、下にグラデーションの線を引く */
+.tx > .closing--xl {
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: clamp(24px, 8.4vw, 40px);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.tx > .closing--xl::after {
+  content: "";
+  display: block;
+  height: 5px;
+  margin-top: 8px;
+  border-radius: 3px;
+  background: var(--grad);
+}
+
+/* 申込ボタンの色: すべて LINE の緑（#06C755）一色にする。右の三角も同じ緑 */
+:root {
+  --c-line-green: #06c755;
+  --grad-cta: linear-gradient(0deg, var(--c-line-green), var(--c-line-green));
+}
+.cta__btn { box-shadow: inset 0 -7px 12px rgba(0, 0, 0, 0.1), inset 0 5px 10px rgba(255, 255, 255, 0.2), 0 8px 18px rgba(6, 199, 85, 0.36); }
+.cta__btn::before { border-left-color: var(--c-line-green); }
+
+/* 挿絵（ロボット）: 角を丸めて影を付け、帯のすぐ下に置く */
+.illust { margin: 22px 0 0; }
+.illust img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+}
+
+/* 小さな挿絵（背景なしのロボット）: 文章の右側に添える。文章は左に回り込む */
+.illust-s {
+  float: right;
+  width: 104px;
+  height: auto;
+  margin: 6px 0 0 10px;
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.18));
+}
+
+/* 小さな挿絵を AI チップの図に差し替え: 正方形なので少し小さめに */
+.illust-s { width: 96px; margin: 8px 4px 0 14px; filter: drop-shadow(0 6px 10px rgba(255, 45, 135, 0.28)); }
+
+/* ==== Day1 はオレンジ一色、Day2 はピンク一色 ====
+   カレンダーの札と Day カードの中だけ、グラデーション用の変数を 1 色に置き換える。 */
+.cal:first-child, .card + .day {
+  --day: #ff7a18;
+  --day-pale: #fff1e3;
+}
+.cal:last-child, .day + .day {
+  --day: #ff2d87;
+  --day-pale: #ffeaf3;
+}
+.cal, .day {
+  --c-coral: var(--day);
+  --c-purple: var(--day);
+  --c-magenta: var(--day);
+  --grad: linear-gradient(var(--day), var(--day));
+  --grad-diag: linear-gradient(var(--day), var(--day));
+}
+.day .day__voice { background: var(--day-pale); }
+.day .day__voice::after { border-top-color: var(--day-pale); }
+
+/* メッセージの区画: 背景を薄いオレンジにし、「私たちはYouTubeが大好きです。」からの語りを白いブロックにする */
+.msg { background: #fff1e3; }
+.msg .msg__box {
+  margin-top: 30px;
+  padding: 30px 16px 32px;
+  border-radius: 14px;
+  background: var(--c-bg);
+  box-shadow: 0 8px 22px rgba(255, 122, 24, 0.16);
+}
+.msg .msg__box > .big:first-child { margin-top: 0; }
+
+/* 「最後に、」を 2 段目（大切なメッセージがあります。）と同じ大きさにする */
+.msg .hd--2line h2 { font-size: clamp(20px, 6.8vw, 32px); line-height: 1.6; }
+.msg .hd--2line h2 .gt { font-size: 1em; }
+
+/* 「プロ体験とは。」の区画の上部に、光る線の画像を敷いてなじませる。
+   画像の黒い部分は「スクリーン」の重ね方で消え、線の光だけが濃い灰色の上に乗る。下へ向かって消えていく */
+[data-frame="pro"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 0;
+  height: 330px;
+  background: url("../img/line.webp") 62% 46% / auto 118% no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.8;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 52%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 52%, transparent 100%);
+  pointer-events: none;
+}
+[data-frame="pro"] > * { position: relative; z-index: 1; }
+[data-frame="pro"] .hd h2 { text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7); }
+[data-frame="pro"] .hd[data-en]::before { color: rgba(255, 255, 255, 0.6); text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); }
+
+/* 「プロ体験とは。」の見出し: 下の短い線をなくし、文字を大きくする */
+[data-frame="pro"] .hd { margin: 26px 0 44px; }
+[data-frame="pro"] .hd h2 { font-size: clamp(34px, 11.4vw, 54px); font-weight: 900; letter-spacing: 0.02em; line-height: 1.3; white-space: nowrap; }
+[data-frame="pro"] .hd h2::after { display: none; }
+
+/* 「プロ体験とは。」: 極太だと画が詰まって潰れて見えるので、一段細い太字にして字間をあけ、影も弱める。
+   すぐ下の一文（YouTube動画制作に憧れているけど、、、）を見出しに近づける */
+[data-frame="pro"] .hd { margin-bottom: 14px; }
+[data-frame="pro"] .hd h2 {
+  font-size: clamp(32px, 10.6vw, 50px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-indent: 0.08em;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+}
+
+/* 「プロ体験とは。」の区画の右下に、ファーストビューの写真を置く。
+   左上へ向かって消えていくようにして、濃い灰色になじませる。写真の分だけ区画の下を広げる */
+[data-frame="pro"] { padding-bottom: calc(190px + var(--slant)); }
+[data-frame="pro"]::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 88%;
+  height: 270px;
+  background: url("../img/fv.webp") 50% 42% / cover no-repeat;
+  -webkit-mask-image: radial-gradient(118% 112% at 100% 100%, #000 34%, transparent 74%);
+  mask-image: radial-gradient(118% 112% at 100% 100%, #000 34%, transparent 74%);
+  pointer-events: none;
+}
+
+/* 右下の写真を大きくし、手とキーボードが右下に見えるように位置を合わせる。消える範囲も減らす */
+[data-frame="pro"] { padding-bottom: calc(250px + var(--slant)); }
+[data-frame="pro"]::after {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 390 / 350;
+  background-position: 100% -22%;
+  background-size: 116% auto;
+  -webkit-mask-image: radial-gradient(135% 125% at 100% 100%, #000 46%, transparent 86%);
+  mask-image: radial-gradient(135% 125% at 100% 100%, #000 46%, transparent 86%);
+}
+/* 写真の上端に境目が出ないよう、上側もなめらかに消す（2 つの消し方を掛け合わせる） */
+[data-frame="pro"]::after {
+  -webkit-mask-image: radial-gradient(135% 125% at 100% 100%, #000 46%, transparent 86%), linear-gradient(180deg, transparent 0%, #000 38%);
+  mask-image: radial-gradient(135% 125% at 100% 100%, #000 46%, transparent 86%), linear-gradient(180deg, transparent 0%, #000 38%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+/* 挿絵をホログラムロボット（背景が透明）に差し替え: 横長なので少し幅を取る */
+.illust-s { width: 150px; margin: 2px -6px 0 6px; filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.14)); }
+
+/* 「プロ体験とは。」の線の部分: 背景を紺色に近い黒にし、下へ向かって元の濃い灰色につなぐ。線は光る白 */
+[data-frame="pro"] { background: linear-gradient(180deg, #05081a 0, #080d24 210px, var(--c-dark) 400px); }
+[data-frame="pro"]::before { opacity: 1; height: 340px; }
+/* 白い線が見出しに重なると読めないので、線は区画の上側に寄せ、見出しはその下に置く */
+[data-frame="pro"]::before {
+  height: 300px;
+  background-position: 62% 6%;
+  background-size: auto 74%;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 50%, transparent 92%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 50%, transparent 92%);
+}
+[data-frame="pro"] { background: linear-gradient(180deg, #05081a 0, #080d24 250px, var(--c-dark) 460px); }
+[data-frame="pro"] .hd { margin-top: 136px; }
+[data-frame="pro"] .hd h2 { text-shadow: 0 2px 10px rgba(5, 8, 26, 0.9), 0 0 22px rgba(5, 8, 26, 0.7); }
+[data-frame="pro"] .hd + .tx p { text-shadow: 0 1px 8px rgba(5, 8, 26, 0.9); }
+/* 線の画像の下端に境目が出ないよう、画像が終わる手前で消しきる */
+[data-frame="pro"]::before {
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 38%, transparent 70%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 38%, transparent 70%);
+}
+
+/* ==== 線を最初の状態に戻す: 素材そのままの色の線を、見出しの後ろに敷く。背景も元の濃い灰色 ==== */
+[data-frame="pro"] { background: var(--c-dark); }
+[data-frame="pro"]::before {
+  height: 330px;
+  background-position: 62% 46%;
+  background-size: auto 118%;
+  opacity: 0.8;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 52%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 52%, transparent 100%);
+}
+[data-frame="pro"] .hd { margin-top: 26px; }
+[data-frame="pro"] .hd h2 { text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45); }
+[data-frame="pro"] .hd + .tx p { text-shadow: none; }
+
+/* 「2日間で、見ている景色が変わる。」: 2 段にそろえて中央に置き、下の線を長く引く */
+.hd--center2 h2 .gt { display: block; white-space: nowrap; }
+.hd--center2 h2::after { width: min(280px, 100%); margin-top: 16px; }
+
+/* 「セミナー参加特典」の区画: 飾りの英字をなくした分、上下の余白を詰める */
+.sec--grad { padding-top: 34px; padding-bottom: 38px; }
